@@ -1,0 +1,58 @@
+{
+  "name": "universal-computers-pos",
+  "version": "1.2.1",
+  "private": true,
+  "description": "Offline POS for Universal Computers, Madina Market Liaquat Pur",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "vite",
+    "check": "tsc --noEmit && tsc -p electron/tsconfig.json --noEmit",
+    "build": "npm run check && vite build && tsc -p electron/tsconfig.json && electron-builder --win nsis",
+    "build:renderer": "npm run check && vite build && tsc -p electron/tsconfig.json",
+    "start": "electron .",
+    "package": "electron-builder --dir",
+    "dist": "electron-builder --win nsis"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.7"
+  },
+  "build": {
+    "appId": "pk.universalcomputers.pos",
+    "productName": "Universal Computers POS",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "deleteAppDataOnUninstall": false
+    }
+  }
+}
